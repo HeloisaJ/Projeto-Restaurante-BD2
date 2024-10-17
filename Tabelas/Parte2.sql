@@ -5,7 +5,7 @@ USE Pizzaria;
 -- Tabela de Clientes
 CREATE TABLE cliente (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    nome VARCHAR(60) NOT NULL,
     sexo ENUM('M', 'F') NOT NULL,
     idade INT NOT NULL,
     nascimento DATE NOT NULL,
@@ -15,9 +15,9 @@ CREATE TABLE cliente (
 -- Tabela de Pratos
 CREATE TABLE prato (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    nome VARCHAR(40) NOT NULL,
     descricao TEXT NOT NULL,
-    valor DECIMAL(10, 2) NOT NULL,
+    valor DECIMAL(5, 2) NOT NULL,
     disponibilidade BOOLEAN NOT NULL
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE venda (
     quantidade INT NOT NULL,
     dia DATE NOT NULL,
     hora TIME NOT NULL,
-    valor DECIMAL(10, 2) NOT NULL,
+    valor DECIMAL(5, 2) NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES cliente(id),
     FOREIGN KEY (id_prato) REFERENCES prato(id)
 );
