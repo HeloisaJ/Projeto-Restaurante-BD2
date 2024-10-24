@@ -4,32 +4,17 @@
 -- idea: see all products that use some ingredient
 SELECT
     -- columns
+	a.nome,
+	b.dia,
+	b.valor
 FROM
     -- tables
+	cliente a
 INNER JOIN 
     -- table
-ON -- condition
-;
-
--- outer join
-SELECT
-    -- columns
-FROM
-    -- tables
-LEFT JOIN 
-    -- other tables
+	venda b
 ON 
     -- condition
+	a.id = b.id_cliente
 ;
 
--- group by
--- idea: group by sex, or if the plate is avaliable
-SELECT
-    -- columns
-FROM 
-    -- tables
-WHERE 
-    -- condition
-GROUP BY
-    -- group
-;
