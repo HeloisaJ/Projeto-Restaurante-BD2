@@ -1,0 +1,57 @@
+/* src/styles/UserManagement.module.css */
+
+.container {
+    text-align: center;
+    padding: 24px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 36px;
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.form {
+    margin-bottom: 24px;
+}
+
+.inputField {
+    margin: 8px 0;
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #c00;
+    border-radius: 4px;
+    color: #000;
+}
+
+.btnSubmit, .btnReset, .btnEdit, .btnDelete {
+    background-color: #c00;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.btnSubmit:hover, .btnReset:hover, .btnEdit:hover, .btnDelete:hover {
+    background-color: #ff4d4d;
+}
+
+.userList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.userItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+}

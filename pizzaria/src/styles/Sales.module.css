@@ -1,0 +1,31 @@
+/* src/styles/Sales.module.css */
+
+.salesContainer {
+    text-align: center;
+    padding: 24px;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.salesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.salesTable th, .salesTable td {
+    border: 1px solid #c00; /* Vermelho */
+    padding: 8px;
+}
+
+.salesTable th {
+    background-color: #ff4d4d; /* Vermelho mais claro */
+    color: white;
+}
+
+.salesTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

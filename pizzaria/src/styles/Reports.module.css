@@ -1,0 +1,22 @@
+/* src/styles/Reports.module.css */
+
+.reportsContainer {
+    text-align: center;
+    padding: 24px;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.report {
+    margin: 16px 0;
+    padding: 12px;
+    border: 1px solid #c00; /* Vermelho */
+    border-radius: 4px;
+}
+
+.report h2 {
+    margin-bottom: 8px;
+}
