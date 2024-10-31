@@ -1,0 +1,57 @@
+/* src/styles/UsePoints.module.css */
+.container {
+    text-align: center;
+    background-color: #000000;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    margin: auto;
+}
+
+.title {
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.inputField {
+    background-color: #000000;
+    border: 1px solid #c00;
+    color: #fff;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.btnUsePoints {
+    background-color: #c00;
+    color: white;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btnUsePoints:hover {
+    background-color: #ff4d4d;
+}
+
+.errorMessage {
+    color: #ff4d4d;
+}
+
+.message {
+    color: #c00;
+}

@@ -1,0 +1,32 @@
+/* src/styles/UsageRelationship.module.css */
+
+.usageContainer {
+    text-align: center;
+    padding: 24px;
+    background-color: black;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.usageTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.usageTable th, .usageTable td {
+    border: 1px solid #c00; /* Vermelho */
+    padding: 8px;
+}
+
+.usageTable th {
+    background-color: #ff4d4d; /* Vermelho mais claro */
+    color: white;
+}
+
+.usageTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
