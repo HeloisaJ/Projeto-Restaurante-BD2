@@ -25,3 +25,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+/*CALL ObterEstatisticasVendas(); para executar procedimento */
