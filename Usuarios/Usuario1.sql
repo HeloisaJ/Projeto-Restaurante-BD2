@@ -6,3 +6,4 @@ GRANT ALL PRIVILEGES ON restaurante.* TO 'Administrador'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON restaurante.* TO 'Gerente'@'localhost';
 GRANT INSERT, SELECT ON restaurante.venda TO 'Funcionario'@'localhost';
 
+FLUSH PRIVILEGES;
