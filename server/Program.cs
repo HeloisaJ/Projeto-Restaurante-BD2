@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 // Add a MySQL connection service
 builder.Services.AddTransient<MySqlConnection>(sp =>
 {
-    string connStr = "Server=localhost;User ID=tester; Password=1234; Database=Pizzaria";
+    string connStr = "Server=localhost; User ID=tester; Password=1234; Database=Pizzaria";
     return new MySqlConnection(connStr);
 });
 
