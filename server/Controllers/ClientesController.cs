@@ -28,7 +28,7 @@ namespace Pizzaria.Controllers
                 return BadRequest();
             }
 
-            
+            _clienteService.PostClienteAsync(c);
             return Created();
         }
     }

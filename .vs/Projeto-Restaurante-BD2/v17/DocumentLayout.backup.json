@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\Documents\\Banco de Dados 2\\Projeto-Restaurante-BD2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|c:\\users\\user\\documents\\banco de dados 2\\projeto-restaurante-bd2\\server\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|solutionrelative:server\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|c:\\users\\user\\documents\\banco de dados 2\\projeto-restaurante-bd2\\server\\services\\clientesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|solutionrelative:server\\services\\clientesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|c:\\users\\user\\documents\\banco de dados 2\\projeto-restaurante-bd2\\server\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE5236A4-3134-44D2-B6A4-A4551173CEB6}|server\\server.csproj|solutionrelative:server\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,30 +18,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ClientesService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Banco de Dados 2\\Projeto-Restaurante-BD2\\server\\Services\\ClientesService.cs",
               "RelativeDocumentMoniker": "server\\Services\\ClientesService.cs",
               "ToolTip": "C:\\Users\\USER\\Documents\\Banco de Dados 2\\Projeto-Restaurante-BD2\\server\\Services\\ClientesService.cs",
               "RelativeToolTip": "server\\Services\\ClientesService.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwC4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T19:44:18.223Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ClientesController.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Banco de Dados 2\\Projeto-Restaurante-BD2\\server\\Controllers\\ClientesController.cs",
               "RelativeDocumentMoniker": "server\\Controllers\\ClientesController.cs",
               "ToolTip": "C:\\Users\\USER\\Documents\\Banco de Dados 2\\Projeto-Restaurante-BD2\\server\\Controllers\\ClientesController.cs",
               "RelativeToolTip": "server\\Controllers\\ClientesController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwB4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T16:24:08.842Z",
               "EditorCaption": ""
