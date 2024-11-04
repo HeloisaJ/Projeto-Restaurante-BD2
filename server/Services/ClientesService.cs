@@ -40,5 +40,21 @@ namespace Pizzaria.Services
 
             return clientes;
         }
+
+        public async void PostClienteAsync(Cliente c){
+
+            using var cn = new MySqlConnection(_connectionString);
+            await cn.OpenAsync();
+
+            string query = "INSERT INTO cliente (nome, sexo, idade, nascimento, pontos) VALUES(" + 
+                c.Nome + ", " + 
+                c.Sexo + ", " +
+                c.Idade + ", " +
+                c.Nascimento + ", " +
+                c.Pontos + ");";
+
+            using var cmd = new MySqlCommand(query, cn);
+            await cmd.ExecuteReaderAsync();
+        }
     }
 }

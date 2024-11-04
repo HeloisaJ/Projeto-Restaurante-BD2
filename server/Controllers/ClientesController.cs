@@ -21,5 +21,15 @@ namespace Pizzaria.Controllers
             var clientes = await _clienteService.GetAllClientesAsync();
             return Ok(clientes);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Cliente>> Post([FromBody] Cliente c){
+            if(c == null){
+                return BadRequest();
+            }
+
+            
+            return Created();
+        }
     }
 }
