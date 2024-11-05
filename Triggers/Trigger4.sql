@@ -7,8 +7,6 @@ CREATE TRIGGER verifica_disponibilidade_prato
 BEFORE INSERT ON venda
 FOR EACH ROW
 BEGIN
-    DECLARE mensagem_erro VARCHAR(255);
-    
     -- Verifica se o prato está disponível
     IF (SELECT disponibilidade FROM prato WHERE id = NEW.id_prato) = FALSE THEN
         SIGNAL SQLSTATE '45000' 
@@ -17,7 +15,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
 
 
 
