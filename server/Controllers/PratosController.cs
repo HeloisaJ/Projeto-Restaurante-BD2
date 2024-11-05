@@ -4,7 +4,7 @@ using Pizzaria.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Pizzaria.Controllers
+namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

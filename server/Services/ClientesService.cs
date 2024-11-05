@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Pizzaria.Services
+namespace server.Services
 {
     public class ClienteService
     {
