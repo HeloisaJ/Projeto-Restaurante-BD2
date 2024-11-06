@@ -3,6 +3,7 @@
 .clientContainer {
     text-align: center;
     padding: 24px;
+    color: white;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     background-color: black;
