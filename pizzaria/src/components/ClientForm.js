@@ -10,10 +10,38 @@ function ClientForm() {
     const [birthDate, setBirthDate] = useState('');
     const [points, setPoints] = useState(0);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aqui você pode adicionar a lógica para enviar os dados ao servidor
-        console.log({ name, gender, age, birthDate, points });
+        const newClient = { name, gender, age, birthDate, points };
+    
+        try {
+            const response = await fetch('http://localhost:3001/api/cliente', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newClient),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit the client data, try again later');
+            }
+
+            const postResult = await response.json();
+            console.log('Response from server: ', postResult);
+            alert('Client added successfully!');
+            
+            // Reset the form after successful submission
+            setName('');
+            setGender('m');
+            setAge('');
+            setBirthDate('');
+            setPoints(0);
+        } 
+        catch (error) {
+            console.error('An error occurred while submitting the client data:', error);
+            alert('An error occurred while adding the client');
+        }
     };
 
     return (
