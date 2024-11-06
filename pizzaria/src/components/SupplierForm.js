@@ -7,10 +7,33 @@ function SupplierForm() {
     const [name, setName] = useState('');
     const [state, setState] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aqui você pode adicionar a lógica para enviar os dados ao servidor
+        
+        const supplier = {name, state};
         console.log({ name, state });
+
+        try{
+            const response = await fetch('http://localhost:3001/api/fornecedor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(supplier),
+            });
+
+            if(!response.ok){
+                throw new Error("Failed to submit the suplier data, try again later");
+            }
+
+            const postResult = await response.json();
+            console.log("Response from server: ", postResult);
+            alert("Supplier added with success!");
+        } 
+        catch(error){
+            console.error("An error occurred while submitting the supplier data:", error);
+            alert("An error occurred while adding the supplier");
+        }
     };
 
     return (
