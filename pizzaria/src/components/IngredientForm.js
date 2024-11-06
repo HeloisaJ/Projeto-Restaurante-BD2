@@ -10,10 +10,33 @@ function IngredientForm() {
     const [quantity, setQuantity] = useState('');
     const [observation, setObservation] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aqui você pode adicionar a lógica para enviar os dados ao servidor
+        
+        const ingredient = {name, manufactureDate, expiryDate, quantity, observation};
         console.log({ name, manufactureDate, expiryDate, quantity, observation });
+
+        try{
+            const response = await fetch('http://localhost:3001/api/ingrediente', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ingredient),
+            });
+
+            if(!response.ok){
+                throw new Error("Failed to submit the ingredient data, try again later");
+            }
+
+            const postResult = await response.json();
+            console.log("Response from server: ", postResult);
+            alert("Ingredient added with success!");
+        }
+        catch(error){
+            console.error("An error occurred while submitting the ingredient data:", error);
+            alert("An error occurred while adding the ingredient");
+        }
     };
 
     return (
