@@ -78,24 +78,24 @@ INSERT INTO fornecedor (nome, estado_origem) VALUES
 ('Fazenda Azul', 'Rio Grande do Norte');
 
 INSERT INTO ingredientes (nome, data_fabricacao, data_validade, quantidade) VALUES
-('Farinha de trigo', '2024-10-02', '2025-01-23', 20),
-('Ovo', '2024-10-16', '2024-11-16', 24),
-('Presunto', '2024-09-13', '2024-11-12', 10),
-('Tomate', '2024-10-14', '2024-10-29', 14),
-('Muçarela', '2024-09-16', '2024-10-23', 12),
-('Abacaxi', '2024-10-14', '2024-10-27', 15),
-('Frango', '2024-10-16', '2024-11-03', 18),
-('Chocolate', '2024-10-16', '2025-01-10', 15),
-('Calabresa', '2024-10-14', '2024-11-16', 18),
-('Pepperoni', '2024-10-08', '2024-10-30', 19),
-('Fermento', '2024-10-07', '2024-11-02', 6),
-('Sal', '2024-10-08', '2025-01-06', 3),
-('Azeite', '2024-10-14', '2024-11-12', 4),
-('Bacon', '2024-10-14', '2024-11-04', 10),
-('Manjericão', '2024-10-14', '2024-10-29', 5),
-('Cebola', '2024-10-16', '2024-10-26', 5),
-('Catupiry', '2024-10-15', '2024-12-18', 5),
-('Azeitona', '2024-10-02', '2025-04-21', 20);
+('Farinha de trigo', '2024-10-02', '2025-01-23', 20), 
+('Ovo', '2024-11-27', '2024-12-29', 24), 
+('Presunto', '2024-10-13', '2024-12-15', 10), 
+('Tomate', '2024-11-26', '2024-12-14', 14), 
+('Muçarela', '2024-11-24', '2024-12-30', 12), 
+('Abacaxi', '2024-11-28', '2024-12-15', 15), 
+('Frango', '2024-11-27', '2024-12-13', 18), 
+('Chocolate', '2024-10-16', '2025-01-10', 15), 
+('Calabresa', '2024-11-14', '2024-12-16', 18), 
+('Pepperoni', '2024-12-08', '2025-01-30', 19), 
+('Fermento', '2024-11-27', '2025-01-02', 6), 
+('Sal', '2024-10-08', '2025-01-06', 3), 
+('Azeite', '2024-11-15', '2024-12-14', 4), 
+('Bacon', '2024-11-24', '2024-12-14', 10), 
+('Manjericão', '2024-11-14', '2024-12-29', 5), 
+('Cebola', '2024-11-26', '2024-12-19', 5), 
+('Catupiry', '2024-11-15', '2025-01-18', 5), 
+('Azeitona', '2024-10-02', '2025-04-21', 20); 
 
 INSERT INTO prato (nome, descricao, valor, disponibilidade) VALUES
 ('Marguerita', 'Pizza com molho de tomate, mozzarella e manjericão.', 30.00, TRUE),
@@ -302,6 +302,23 @@ END;
 
 CALL EstatisticasVendas();
 
+DROP PROCEDURE IF EXISTS sorteia_cliente_premiado;
+
+CREATE PROCEDURE sorteia_cliente_premiado()
+BEGIN
+    DECLARE cliente_id INT;
+
+    SELECT id INTO cliente_id
+    FROM cliente
+    ORDER BY RAND()
+    LIMIT 1;
+
+    UPDATE cliente
+    SET pontos = pontos + 100
+    WHERE id = cliente_id;
+
+END;
+
 DROP TRIGGER IF EXISTS sales_update;
 
 CREATE TRIGGER sales_update
@@ -322,16 +339,22 @@ BEGIN
 	);
 END;
 
-CREATE TRIGGER validade_ingrediente
-BEFORE INSERT ON venda
-FOR EACH ROW 
-BEGIN 
+DROP EVENT IF EXISTS verificar_validade;
+
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT verificar_validade 
+ON SCHEDULE EVERY 15 SECOND
+DO
+BEGIN
 	UPDATE prato 
     SET disponibilidade = FALSE
-    WHERE id = (SELECT usos.id_prato
+    WHERE id IN (SELECT usos.id_prato
 			FROM usos INNER JOIN ingredientes ON usos.id_ingrediente = ingredientes.id
-			WHERE NEW.id_prato = usos.id_prato AND DATEDIFF(ingredientes.data_validade, CURDATE()) < 0);
+			WHERE DATEDIFF(ingredientes.data_validade, CURDATE()) < 0);
 END;
+
+DROP TRIGGER IF EXISTS calcula_pontos;
 
 CREATE TRIGGER calcula_pontos
 AFTER INSERT ON venda
@@ -347,6 +370,25 @@ BEGIN
             SET pontos = pontos + pontos_ganhos
             WHERE id = NEW.id_cliente;
         END IF;
+    END IF;
+END;
+
+DROP TRIGGER IF EXISTS verifica_disponibilidade_prato;
+
+CREATE TRIGGER verifica_disponibilidade_prato
+BEFORE INSERT ON venda
+FOR EACH ROW
+BEGIN
+    DECLARE disponibilidade_prato BOOLEAN;
+
+    SELECT disponibilidade INTO disponibilidade_prato
+    FROM prato 
+    WHERE id = NEW.id_prato
+    LIMIT 1;
+
+    IF disponibilidade_prato = FALSE THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Erro: O prato está indisponível para venda.';
     END IF;
 END;
 
@@ -383,3 +425,13 @@ RIGHT JOIN
 	ingredientes b
 ON
 	b.id = c.id_ingrediente;
+
+CREATE USER 'Administrador'@'localhost' IDENTIFY BY '123';
+CREATE USER 'Gerente'@'localhost' IDENTIFY BY '456';
+CREATE USER 'Funcionario'@'localhost' IDENTIFY BY '789';
+
+GRANT ALL PRIVILEGES ON Pizzaria.* TO 'Administrador'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON Pizzaria.* TO 'Gerente'@'localhost';
+GRANT INSERT, SELECT ON Pizzaria.venda TO 'Funcionario'@'localhost';
+
+FLUSH PRIVILEGES;
