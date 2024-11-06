@@ -170,6 +170,8 @@ const runScript = async (m, t, inp) => {
     }
 };
 
+module.exports(runScript);
+
 // Execute o script
 // add the runScript to the files and pass the infos
 // m means what it will do {
