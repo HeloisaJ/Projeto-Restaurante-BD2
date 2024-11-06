@@ -12,7 +12,7 @@ function ClientForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newClient = { name, gender, age, birthDate, points };
+        const newClient = { nome: name, sexo: gender, idade: age, nascimento: birthDate, pontos: points };
     
         try {
             const response = await fetch('http://localhost:3001/api/cliente', {

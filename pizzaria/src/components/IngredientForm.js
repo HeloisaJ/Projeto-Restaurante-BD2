@@ -13,7 +13,7 @@ function IngredientForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const ingredient = {name, manufactureDate, expiryDate, quantity, observation};
+        const ingredient = {nome: name, data_fabricacao: manufactureDate, data_validade: expiryDate, quantidade: quantity, observacao: observation};
         console.log({ name, manufactureDate, expiryDate, quantity, observation });
 
         try{

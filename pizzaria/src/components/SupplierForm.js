@@ -10,7 +10,7 @@ function SupplierForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const supplier = {name, state};
+        const supplier = {nome: name, estado_origem: state};
         console.log({ name, state });
 
         try{
