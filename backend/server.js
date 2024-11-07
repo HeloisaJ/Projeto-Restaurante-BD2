@@ -207,6 +207,8 @@ app.post("/api/venda", async (req, res) => {
     }
 });
 
+// ** WARD **
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });
