@@ -167,6 +167,8 @@ const postVenda = async (
     }
 };
 
+// ** EXPORTS **
+
 export {
     getCliente,
     getFornecedor,
