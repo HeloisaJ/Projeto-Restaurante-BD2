@@ -1,5 +1,3 @@
-// src/components/Reports.js
-
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Reports.module.css';
 
@@ -11,10 +9,14 @@ function Reports() {
         vendasPorMes: {}
     });
 
+    // Buscar os relatórios quando o componente for montado
     useEffect(() => {
         const fetchRelatorios = async () => {
             try {
-                const response = await fetch('/api/reports'); // Ajuste a URL conforme necessário
+                const response = await fetch('http://localhost:3001/api/reports');
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar relatórios.");
+                }
                 const data = await response.json();
                 setRelatorios(data);
             } catch (error) {
