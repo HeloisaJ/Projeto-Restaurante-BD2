@@ -20,7 +20,6 @@ function Dashboard() {
             <button onClick={() => navigate('/price-adjustment')} className={styles.optionButton}>Reajuste de Preços</button>
             <button onClick={() => navigate('/raffle')} className={styles.optionButton}>Sorteio de Clientes</button>
             <button onClick={() => navigate('/use-points')} className={styles.optionButton}>Uso de Pontos</button>
-            <button onClick={() => navigate('/ingredient-management')} className={styles.optionButton}>Gestão de Ingredientes</button> 
             <button onClick={() => navigate('/user-management')} className={styles.optionButton}>Gestão de Usuários</button> {/* Nova opção */}
         </div>
     );

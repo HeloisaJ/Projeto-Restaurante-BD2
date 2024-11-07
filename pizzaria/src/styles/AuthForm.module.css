@@ -1,73 +1,78 @@
 .authContainer {
     text-align: center;
-    background-color: #000000;
-    color: white;
+    background-color: #1a1a1a;
+    color: #ffffff;
     padding: 24px;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    width: 320px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 320px;
     margin: auto;
+    margin-top: 50px;
+    transition: transform 0.2s;
+}
+
+.authContainer:hover {
+    transform: scale(1.02);
 }
 
 .title {
     font-size: 36px;
     margin-bottom: 8px;
+    color: #ff4d4d;
 }
 
 .subtitle {
     font-size: 24px;
     margin-bottom: 24px;
+    color: #cccccc;
 }
 
 .formGroup {
     margin-bottom: 16px;
+    text-align: left;
 }
 
 .label {
     display: block;
-    text-align: left;
     margin-bottom: 8px;
+    color: #cccccc;
 }
 
 .inputField {
-    background-color: #000000;
-    border: 1px solid #c00;
-    color: #000;
+    background-color: #333333;
+    border: 1px solid #ff4d4d;
+    color: #ffffff;
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
+    margin-top: 5px;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .inputField:focus {
-    border-color: #ff4d4d;
+    border-color: #ff6666;
+    box-shadow: 0 0 5px rgba(255, 102, 102, 0.5);
     outline: none;
+}
+
+.errorText {
+    color: #ff6666;
+    margin-bottom: 16px;
 }
 
 .btnSignin {
     background-color: #c00;
-    color: white;
+    color: #ffffff;
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
-    margin-bottom: 16px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
 }
 
 .btnSignin:hover {
     background-color: #ff4d4d;
-}
-
-.link {
-    color: #c00;
-    text-decoration: none;
-}
-
-.link:hover {
-    text-decoration: underline;
-}
-
-.divider {
-    border-top: 1px solid #c00;
-    padding-top: 16px;
 }

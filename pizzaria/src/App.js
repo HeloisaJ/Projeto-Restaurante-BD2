@@ -11,7 +11,6 @@ import Sales from './components/Sales';
 import Reports from './components/Reports';
 import PriceAdjustment from './components/PriceAdjustment'; 
 import Raffle from './components/Raffle';
-import IngredientManagement from './components/IngredientManagement';
 import UsePoints from './components/UsePoints'; 
 import UserManagement from './components/UserManagement';
 
@@ -31,7 +30,6 @@ function App() {
                 <Route path="/price-adjustment" element={<PriceAdjustment />} /> 
                 <Route path="/raffle" element={<Raffle />} />
                 <Route path="/use-points" element={<UsePoints />} /> 
-                <Route path="/ingredient-management" element={<IngredientManagement />} /> 
                 <Route path="/user-management" element={<UserManagement />} />
             </Routes>
         </Router>
