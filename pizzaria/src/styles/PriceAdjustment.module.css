@@ -7,13 +7,18 @@
     padding: 24px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    width: 320px;
+    max-width: 400px;
     margin: auto;
 }
 
 .title {
     font-size: 36px;
     margin-bottom: 8px;
+}
+
+.subTitle {
+    font-size: 28px;
+    margin-top: 24px;
 }
 
 .formGroup {
@@ -59,4 +64,17 @@
     margin-top: 20px;
     font-size: 18px;
     color: green;
+}
+
+.adjustmentTable {
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+    border-collapse: collapse;
+}
+
+.adjustmentTable th, .adjustmentTable td {
+    padding: 8px;
+    border-bottom: 1px solid #c00;
+    text-align: center;
 }
