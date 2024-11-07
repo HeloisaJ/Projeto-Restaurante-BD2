@@ -1,5 +1,7 @@
-DROP DATABASE Pizzaria;
-CREATE DATABASE IF NOT EXISTS Pizzaria;
+-- GRANT CREATE, DROP, ALTER, REFERENCES ON *.* TO 'testerpizza'@'localhost';GRANT CREATE ROUTINE, ALTER ROUTINE, EXECUTE ON *.* TO 'testerpizza'@'localhost';GRANT TRIGGER, EVENT ON *.* TO 'testerpizza'@'localhost';GRANT CREATE ROUTINE, ALTER ROUTINE, DROP ON *.* TO 'testerpizza'@'localhost';GRANT SUPER ON *.* TO 'testerpizza'@'localhost';GRANT ALL PRIVILEGES ON *.* TO 'testerpizza'@'localhost' WITH GRANT OPTION;FLUSH PRIVILEGES;
+
+-- DROP DATABASE Pizzaria;
+-- CREATE DATABASE IF NOT EXISTS Pizzaria;
 USE Pizzaria;
 
 CREATE TABLE IF NOT EXISTS cliente (
@@ -63,7 +65,7 @@ INSERT INTO cliente (nome, sexo, idade, nascimento, pontos) VALUES
 ('Frieza', 'M', 50, '1975-09-08', 300),
 ('Android 18', 'F', 29, '1994-12-15', 90),
 ('Trunks', 'M', 18, '2003-03-29', 60),
-('Chi-Chi', 'F', 35, '1989-02-05', 110);   
+('Chi-Chi', 'F', 35, '1989-02-05', 110);
 
 INSERT INTO fornecedor (nome, estado_origem) VALUES
 ('Granja do Sol', 'Pernambuco'),
@@ -78,24 +80,24 @@ INSERT INTO fornecedor (nome, estado_origem) VALUES
 ('Fazenda Azul', 'Rio Grande do Norte');
 
 INSERT INTO ingredientes (nome, data_fabricacao, data_validade, quantidade) VALUES
-('Farinha de trigo', '2024-10-02', '2025-01-23', 20), 
-('Ovo', '2024-11-27', '2024-12-29', 24), 
-('Presunto', '2024-10-13', '2024-12-15', 10), 
-('Tomate', '2024-11-26', '2024-12-14', 14), 
-('Muçarela', '2024-11-24', '2024-12-30', 12), 
-('Abacaxi', '2024-11-28', '2024-12-15', 15), 
-('Frango', '2024-11-27', '2024-12-13', 18), 
-('Chocolate', '2024-10-16', '2025-01-10', 15), 
-('Calabresa', '2024-11-14', '2024-12-16', 18), 
-('Pepperoni', '2024-12-08', '2025-01-30', 19), 
-('Fermento', '2024-11-27', '2025-01-02', 6), 
-('Sal', '2024-10-08', '2025-01-06', 3), 
-('Azeite', '2024-11-15', '2024-12-14', 4), 
-('Bacon', '2024-11-24', '2024-12-14', 10), 
-('Manjericão', '2024-11-14', '2024-12-29', 5), 
-('Cebola', '2024-11-26', '2024-12-19', 5), 
-('Catupiry', '2024-11-15', '2025-01-18', 5), 
-('Azeitona', '2024-10-02', '2025-04-21', 20); 
+('Farinha de trigo', '2024-10-02', '2025-01-23', 20),
+('Ovo', '2024-11-27', '2024-12-29', 24),
+('Presunto', '2024-10-13', '2024-12-15', 10),
+('Tomate', '2024-11-26', '2024-12-14', 14),
+('Muçarela', '2024-11-24', '2024-12-30', 12),
+('Abacaxi', '2024-11-28', '2024-12-15', 15),
+('Frango', '2024-11-27', '2024-12-13', 18),
+('Chocolate', '2024-10-16', '2025-01-10', 15),
+('Calabresa', '2024-11-14', '2024-12-16', 18),
+('Pepperoni', '2024-12-08', '2025-01-30', 19),
+('Fermento', '2024-11-27', '2025-01-02', 6),
+('Sal', '2024-10-08', '2025-01-06', 3),
+('Azeite', '2024-11-15', '2024-12-14', 4),
+('Bacon', '2024-11-24', '2024-12-14', 10),
+('Manjericão', '2024-11-14', '2024-12-29', 5),
+('Cebola', '2024-11-26', '2024-12-19', 5),
+('Catupiry', '2024-11-15', '2025-01-18', 5),
+('Azeitona', '2024-10-02', '2025-04-21', 20);
 
 INSERT INTO prato (nome, descricao, valor, disponibilidade) VALUES
 ('Marguerita', 'Pizza com molho de tomate, mozzarella e manjericão.', 30.00, TRUE),
@@ -107,7 +109,7 @@ INSERT INTO prato (nome, descricao, valor, disponibilidade) VALUES
 ('Abacaxi', 'Pizza de abacaxi com presunto.', 30.00, TRUE),
 ('Bacon', 'Pizza de bacon crocante.', 35.00, TRUE),
 ('Portuguesa', 'Pizza com ovos, presunto, cebola e azeitona.', 33.00, TRUE),
-('Mista', 'Pizza com dois sabores: muçarela e calabresa.', 36.00, TRUE);     
+('Mista', 'Pizza com dois sabores: muçarela e calabresa.', 36.00, TRUE);
 
 INSERT INTO usos (id_prato, id_ingrediente) VALUES
 (1, 1),
@@ -188,6 +190,8 @@ INSERT INTO venda (id_cliente, id_prato, quantidade, dia, hora, valor) VALUES
 (9, 9, 2, '2024-10-07', '20:00:00', 66.00),
 (10, 10, 1, '2024-10-06', '19:30:00', 36.00);
 
+DROP FUNCTION IF EXISTS calculo_pontos;
+
 CREATE DEFINER=`testerpizza`@`localhost` FUNCTION `calculo_pontos`(valor DECIMAL(5, 2)) RETURNS INT
 BEGIN
     DECLARE pontos INT;
@@ -213,16 +217,16 @@ BEGIN
     SELECT pontos INTO quant_pontos
     FROM cliente
     WHERE id_cliente = id_cliente;  -- Fixed variable reference
-    
+
     SET valor_pedido := CEILING(valor);
-    
+
     IF quant_pontos >= valor_pedido THEN
         SET quant_pontos := quant_pontos - valor_pedido;
         UPDATE cliente SET pontos = quant_pontos WHERE id_cliente = id_cliente;  -- Fixed variable reference
-        
-        INSERT INTO venda (id_cliente, id_prato, quantidade, dia, hora, valor) 
+
+        INSERT INTO venda (id_cliente, id_prato, quantidade, dia, hora, valor)
         VALUES (id_cliente, id_prato, quantidade, dia, hora, valor);
-    ELSE 
+    ELSE
         SELECT quant_pontos;  -- This will output the quant_pontos if insufficient
     END IF;
 END;
@@ -243,7 +247,7 @@ BEGIN
     DECLARE mes_mais_vendas_menos VARCHAR(7); -- Mantendo o formato 'YYYY-MM'
     DECLARE mes_menos_vendas_menos VARCHAR(7); -- Mantendo o formato 'YYYY-MM'
 
-    SELECT 
+    SELECT
         p.nome AS nome_prato,
         SUM(v.quantidade) AS total_vendido,
         SUM(v.valor) AS total_valor,
@@ -255,7 +259,7 @@ BEGIN
     ORDER BY total_vendido DESC
     LIMIT 1;
 
-    SELECT 
+    SELECT
         DATE_FORMAT(v.dia, '%Y-%m') AS mes_menos
     INTO mes_menos_vendas
     FROM venda v
@@ -265,7 +269,7 @@ BEGIN
     ORDER BY SUM(v.quantidade) ASC
     LIMIT 1;
 
-    SELECT 
+    SELECT
         p.nome AS nome_prato,
         SUM(v.quantidade) AS total_vendido,
         SUM(v.valor) AS total_valor,
@@ -277,7 +281,7 @@ BEGIN
     ORDER BY total_vendido ASC
     LIMIT 1;
 
-    SELECT 
+    SELECT
         DATE_FORMAT(v.dia, '%Y-%m') AS mes_mais
     INTO mes_menos_vendas_menos
     FROM venda v
@@ -287,7 +291,7 @@ BEGIN
     ORDER BY SUM(v.quantidade) DESC
     LIMIT 1;
 
-    SELECT 
+    SELECT
         produto_mais_vendido AS 'Produto Mais Vendido',
         quantidade_vendida_mais AS 'Quantidade Vendida (Mais)',
         valor_ganho_mais AS 'Valor Ganho (Mais)',
@@ -330,12 +334,12 @@ BEGIN
 	SET quantidade = quantidade - NEW.quantidade
 	WHERE id IN
 	(
-		SELECT 
+		SELECT
 			a.id_ingrediente
-		FROM 
+		FROM
 			usos a
-		WHERE 
-			a.id_prato = NEW.id_prato 
+		WHERE
+			a.id_prato = NEW.id_prato
 	);
 END;
 
@@ -343,22 +347,25 @@ DROP EVENT IF EXISTS verificar_validade;
 
 SET GLOBAL event_scheduler = ON;
 
-CREATE EVENT verificar_validade 
+CREATE EVENT verificar_validade
 ON SCHEDULE EVERY 15 SECOND
 DO
 BEGIN
-	UPDATE prato 
+    UPDATE prato
     SET disponibilidade = FALSE
-    WHERE id IN (SELECT usos.id_prato
-			FROM usos INNER JOIN ingredientes ON usos.id_ingrediente = ingredientes.id
-			WHERE DATEDIFF(ingredientes.data_validade, CURDATE()) < 0);
+    WHERE id IN (
+        SELECT usos.id_prato
+        FROM usos
+        INNER JOIN ingredientes ON usos.id_ingrediente = ingredientes.id
+        WHERE ingredientes.data_validade < CURDATE()
+    );
 END;
 
 DROP TRIGGER IF EXISTS calcula_pontos;
 
 CREATE TRIGGER calcula_pontos
 AFTER INSERT ON venda
-FOR EACH ROW 
+FOR EACH ROW
 BEGIN
     DECLARE pontos_ganhos INT;
 
@@ -382,12 +389,12 @@ BEGIN
     DECLARE disponibilidade_prato BOOLEAN;
 
     SELECT disponibilidade INTO disponibilidade_prato
-    FROM prato 
+    FROM prato
     WHERE id = NEW.id_prato
     LIMIT 1;
 
     IF disponibilidade_prato = FALSE THEN
-        SIGNAL SQLSTATE '45000' 
+        SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Erro: O prato está indisponível para venda.';
     END IF;
 END;
@@ -398,16 +405,16 @@ SELECT
 	b.valor
 FROM
 	cliente a
-INNER JOIN 
+INNER JOIN
 	venda b
-ON 
+ON
 	a.id = b.id_cliente;
 
 SELECT
 	*
-FROM 
+FROM
 	cliente
-WHERE 
+WHERE
 	cliente.sexo = "M"
 GROUP BY
 	cliente.idade;
@@ -417,18 +424,18 @@ SELECT
 	b.nome AS nome_ingrediente
 FROM
 	prato a
-LEFT JOIN 
+LEFT JOIN
 	usos c
-ON 
+ON
 	a.id = c.id_prato
 RIGHT JOIN
 	ingredientes b
 ON
 	b.id = c.id_ingrediente;
 
-CREATE USER 'Administrador'@'localhost' IDENTIFY BY '123';
-CREATE USER 'Gerente'@'localhost' IDENTIFY BY '456';
-CREATE USER 'Funcionario'@'localhost' IDENTIFY BY '789';
+CREATE USER IF NOT EXISTS 'Administrador'@'localhost' IDENTIFIED BY 'pass123';
+CREATE USER IF NOT EXISTS 'Gerente'@'localhost' IDENTIFIED BY 'pass456';
+CREATE USER IF NOT EXISTS 'Funcionario'@'localhost' IDENTIFIED BY 'pass789';
 
 GRANT ALL PRIVILEGES ON Pizzaria.* TO 'Administrador'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON Pizzaria.* TO 'Gerente'@'localhost';

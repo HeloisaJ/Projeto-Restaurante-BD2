@@ -1,10 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const db = require("./db/methods");
 
 const app = express();
 const port = 3001;
 
 app.use(express.json());
+app.use(cors());
 
 // ** GET **
 
