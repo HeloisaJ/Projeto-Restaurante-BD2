@@ -65,6 +65,15 @@ app.get("/api/vendas", async (req, res) => {
     }
 });
 
+app.get("/api/estatisticas", async (req, res) => {
+    try {
+        const stats = await db.getStats();
+        res.json(stats);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching stats in server. " });
+    }
+});
+
 // ** POST **
 
 app.post("/api/reajuste", async (req, res) => {

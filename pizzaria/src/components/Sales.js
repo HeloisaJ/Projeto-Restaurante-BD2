@@ -1,15 +1,15 @@
-// src/components/Sales.js
-
-import React, { useEffect, useState } from 'react';
-import styles from '../styles/Sales.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "../styles/Sales.module.css";
 
 function Sales() {
     const [vendas, setVendas] = useState([]);
+    const [clientes, setClientes] = useState([]);
+    const [pratos, setPratos] = useState([]);
 
     useEffect(() => {
         const fetchVendas = async () => {
             try {
-                const response = await fetch('/api/vendas'); // Ajuste a URL conforme necessário
+                const response = await fetch("http://localhost/api/vendas");
                 const data = await response.json();
                 setVendas(data);
             } catch (error) {
@@ -17,8 +17,40 @@ function Sales() {
             }
         };
 
+        const fetchClientes = async () => {
+            try {
+                const response = await fetch("http://localhost/api/clientes"); // Adjusted URL
+                const data = await response.json();
+                setClientes(data);
+            } catch (error) {
+                console.error("Erro ao buscar dados de clientes:", error);
+            }
+        };
+
+        const fetchPratos = async () => {
+            try {
+                const response = await fetch("http://localhost/api/pratos"); // Adjusted URL
+                const data = await response.json();
+                setPratos(data);
+            } catch (error) {
+                console.error("Erro ao buscar dados de pratos:", error);
+            }
+        };
+
         fetchVendas();
+        fetchClientes();
+        fetchPratos();
     }, []);
+
+    const getNomeCliente = (idCliente) => {
+        const cliente = clientes.find((cliente) => cliente.id === idCliente);
+        return cliente ? cliente.nome : "Cliente não encontrado";
+    };
+
+    const getNomePrato = (idPrato) => {
+        const prato = pratos.find((prato) => prato.id === idPrato);
+        return prato ? prato.nome : "Prato não encontrado";
+    };
 
     return (
         <div className={styles.salesContainer}>
@@ -37,8 +69,8 @@ function Sales() {
                 <tbody>
                     {vendas.map((venda) => (
                         <tr key={venda.id}>
-                            <td>{venda.nome_cliente}</td>
-                            <td>{venda.nome_prato}</td>
+                            <td>{getNomeCliente(venda.id_cliente)}</td>
+                            <td>{getNomePrato(venda.id_prato)}</td>
                             <td>{venda.quantidade}</td>
                             <td>{venda.dia}</td>
                             <td>{venda.hora}</td>

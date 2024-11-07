@@ -87,6 +87,16 @@ const getVendas = async () => {
     }
 };
 
+const getStats = async () => {
+    try {
+        const results = await executeQuery("CALL EstatisticasVendas()");
+        console.log("Estatisticas: ", results);
+        return results;
+    } catch (error) {
+        console.log("Error executing post method for cliente:", error);
+    }
+};
+
 // ** POST **
 
 const postCliente = async (nome, sexo, idade, nascimento, pontos) => {
