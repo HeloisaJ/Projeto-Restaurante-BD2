@@ -167,6 +167,17 @@ const postVenda = async (
     }
 };
 
+const postReajuste = async (adjustment) => {
+    const query = "CALL reajuste(?);";
+    const values = [adjustment];
+    try {
+        const results = await executeQuery(query, values);
+        return results;
+    } catch (error) {
+        throw error;
+    }
+};
+
 // ** EXPORTS **
 
 export {
@@ -181,4 +192,5 @@ export {
     postIngrediente,
     postPrato,
     postVenda,
+    postReajuste,
 };

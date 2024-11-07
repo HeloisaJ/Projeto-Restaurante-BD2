@@ -1,30 +1,35 @@
 // src/components/PriceAdjustment.js
 
-import React, { useState } from 'react';
-import styles from '../styles/PriceAdjustment.module.css';
+import React, { useState } from "react";
+import styles from "../styles/PriceAdjustment.module.css";
 
 function PriceAdjustment() {
-    const [percentual, setPercentual] = useState('');
-    const [message, setMessage] = useState('');
+    const [percentual, setPercentual] = useState("");
+    const [message, setMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const sendData = {
+            adjustment: parseFloat(percentual),
+        };
+
         try {
-            const response = await fetch('/api/adjust-prices', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ percentual: parseFloat(percentual) })
+            const response = await fetch("http://localhost:3001/api/reajuste", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(sendData),
             });
             const data = await response.json();
             if (response.ok) {
                 setMessage(data.message);
-                setPercentual('');
+                setPercentual("");
             } else {
-                setMessage(data.error || 'Erro ao reajustar preços.');
+                setMessage(data.error || "Erro ao reajustar preços.");
             }
         } catch (error) {
             console.error("Erro:", error);
-            setMessage('Erro ao realizar o reajuste.');
+            setMessage("Erro ao realizar o reajuste.");
         }
     };
 
@@ -44,7 +49,9 @@ function PriceAdjustment() {
                         />
                     </label>
                 </div>
-                <button type="submit" className={styles.btnAdjust}>Reajustar Preços</button>
+                <button type="submit" className={styles.btnAdjust}>
+                    Reajustar Preços
+                </button>
             </form>
             {message && <p className={styles.message}>{message}</p>}
         </div>

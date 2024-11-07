@@ -1,15 +1,14 @@
-// src/components/UsageRelationship.js
-
-import React, { useEffect, useState } from 'react';
-import styles from '../styles/UsageRelationship.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "../styles/UsageRelationship.module.css";
 
 function UsageRelationship() {
     const [usos, setUsos] = useState([]);
+    const [pratos, setPratos] = useState([]);
 
     useEffect(() => {
         const fetchUsos = async () => {
             try {
-                const response = await fetch('/api/usos'); // Ajuste a URL conforme necessário
+                const response = await fetch("http://localhost:3001/api/usos"); // URL corrigida
                 const data = await response.json();
                 setUsos(data);
             } catch (error) {
@@ -17,7 +16,18 @@ function UsageRelationship() {
             }
         };
 
+        const fetchPratos = async () => {
+            try {
+                const response = await fetch("http://localhost:3001/api/prato"); // URL corrigida
+                const data = await response.json();
+                setPratos(data);
+            } catch (error) {
+                console.error("Erro ao buscar dados de usos:", error);
+            }
+        };
+
         fetchUsos();
+        fetchPratos();
     }, []);
 
     return (

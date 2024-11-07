@@ -66,6 +66,25 @@ app.get("/api/vendas", async (req, res) => {
 });
 
 // ** POST **
+
+app.post("/api/reajuste", async (req, res) => {
+    const { adjustment } = req.body;
+
+    if (!adjustment) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    try {
+        const result = await db.postReajuste(adjustment);
+        res.status(201).json({ message: "Reajuste feito", result });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error inserting cliente",
+            error: error.message,
+        });
+    }
+});
+
 app.post("/api/cliente", async (req, res) => {
     // Destructure fields from request body
     const { nome, sexo, idade, nascimento, pontos } = req.body;
